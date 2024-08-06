@@ -61,26 +61,37 @@ const Login: React.FC<LoginProps> = () => {
     };
 
     return (
-        <>
-            <h2>Formulario de Login</h2>
-            <form onSubmit={submitHandler} className=''>
+        <div className="mx-auto flex flex-col items-center gap-8 rounded-lg bg-black p-6 text-white shadow-2xl shadow-black sm:w-3/4 md:w-2/4 lg:w-1/3">
+            <h2 className="text-xl">Formulario de Login</h2>
+            <form onSubmit={submitHandler} className="flex w-full flex-col">
                 <label>
-                    <span className=''>Email:</span>
+                    <span className="">Email</span>
                     <br />
-                    <input className='' type='email' name='email'></input>
+                    <input
+                        className="h-8 w-full rounded p-2 text-black outline-black"
+                        type="email"
+                        name="email"
+                    ></input>
                 </label>
                 <br />
                 <label>
-                    <span className=''>Contraseña:</span>
+                    <span className="">Contraseña</span>
                     <br />
-                    <input className='' type='password' name='password'></input>
+                    <input
+                        className="h-8 w-full rounded p-2 text-black outline-black"
+                        type="password"
+                        name="password"
+                    ></input>
                 </label>
                 <br />
-                <button className='' type='submit'>
+                <button
+                    className="mx-auto h-8 w-1/2 rounded border-2 border-white hover:bg-white hover:font-bold hover:text-black"
+                    type="submit"
+                >
                     Log in
                 </button>
             </form>
-        </>
+        </div>
     );
 };
 

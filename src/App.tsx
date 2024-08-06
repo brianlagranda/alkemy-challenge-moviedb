@@ -7,15 +7,21 @@ import Login from './components/Login';
 function App() {
     return (
         <BrowserRouter>
-            <Header />
-            <Routes>
-                <Route
-                    path='/'
-                    element={<Login target={''} email={''} password={''} />}
-                ></Route>
-                <Route path='/listado' element={<Listado />}></Route>
-            </Routes>
-            <Footer />
+            <div className="flex h-screen select-none flex-col justify-between">
+                <Header />
+                <div className="container mx-auto p-4">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <Login target={''} email={''} password={''} />
+                            }
+                        ></Route>
+                        <Route path="/listado" element={<Listado />}></Route>
+                    </Routes>
+                </div>
+                <Footer />
+            </div>
         </BrowserRouter>
     );
 }

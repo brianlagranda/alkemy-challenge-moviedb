@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <header className=''>
-            <nav className=''>
-                <ul className=''>
-                    <li className=''>
-                        <Link to='/' />
+        <header className="flex h-12 items-center justify-between bg-black p-4 text-white">
+            <h1 className="text-xl font-bold">AlkeFlix</h1>
+            <nav className="">
+                <ul className="flex gap-2">
+                    <li className="hover:bg-white hover:text-black">
+                        <Link to="/">Inicio</Link>
                     </li>
-                    <li className=''>
-                        <Link to='/listado' />
+                    <li className="hover:bg-white hover:text-black">
+                        <Link to="/listado">Listado</Link>
                     </li>
-                    <li className=''>
-                        <Link to='/contacto' />
+                    <li className="hover:bg-white hover:text-black">
+                        <Link to="/contacto">Contacto</Link>
                     </li>
                 </ul>
             </nav>
