@@ -63,28 +63,20 @@ const Login: React.FC<LoginProps> = () => {
     return (
         <>
             <h2>Formulario de Login</h2>
-            <form onSubmit={submitHandler} className='loginForm'>
+            <form onSubmit={submitHandler} className=''>
                 <label>
-                    <span className='loginForm-label'>Email:</span>
+                    <span className=''>Email:</span>
                     <br />
-                    <input
-                        className='loginForm-input'
-                        type='email'
-                        name='email'
-                    ></input>
+                    <input className='' type='email' name='email'></input>
                 </label>
                 <br />
                 <label>
-                    <span className='loginForm-label'>Contraseña:</span>
+                    <span className=''>Contraseña:</span>
                     <br />
-                    <input
-                        className='loginForm-input'
-                        type='password'
-                        name='password'
-                    ></input>
+                    <input className='' type='password' name='password'></input>
                 </label>
                 <br />
-                <button className='loginForm-button' type='submit'>
+                <button className='' type='submit'>
                     Log in
                 </button>
             </form>
