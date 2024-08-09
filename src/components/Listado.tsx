@@ -16,7 +16,7 @@ const MySwal = withReactContent(Swal);
 const Listado = () => {
     const [moviesList, setMoviesList] = useState<Movie[]>([]);
 
-    const Token = localStorage.getItem('token');
+    const Token = sessionStorage.getItem('token');
 
     useEffect(() => {
         axios
@@ -37,7 +37,7 @@ const Listado = () => {
 
     return (
         <>
-            {!Token && <Navigate to="/login" />}
+            {!Token && <Navigate to="/" />}
 
             <div className="grid grid-cols-1 gap-4">
                 {moviesList.map((movie, idx) => {

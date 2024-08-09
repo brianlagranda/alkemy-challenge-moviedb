@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface LoginProps {
     target: string;
@@ -50,8 +50,8 @@ const Login: React.FC<LoginProps> = () => {
             email,
             password,
         }).then((res) => {
-            const Token = res.data.token;
-            localStorage.setItem('token', Token);
+            const tokenData = res.data.token;
+            sessionStorage.setItem('token', tokenData);
             MySwal.fire({
                 title: 'Perfecto, ingresaste correctamente.',
                 icon: 'success',
@@ -60,38 +60,44 @@ const Login: React.FC<LoginProps> = () => {
         });
     };
 
+    const Token = sessionStorage.getItem('token');
+
     return (
-        <div className="mx-auto flex flex-col items-center gap-8 rounded-lg bg-black p-6 text-white shadow-2xl shadow-black sm:w-3/4 md:w-2/4 lg:w-1/3">
-            <h2 className="text-xl">Formulario de Login</h2>
-            <form onSubmit={submitHandler} className="flex w-full flex-col">
-                <label>
-                    <span className="">Email</span>
+        <>
+            {Token && <Navigate to="/listado" />}
+
+            <div className="mx-auto flex flex-col items-center gap-8 rounded-lg bg-black p-6 text-white shadow-2xl shadow-black sm:w-3/4 md:w-2/4 lg:w-1/3">
+                <h2 className="text-xl">Formulario de Login</h2>
+                <form onSubmit={submitHandler} className="flex w-full flex-col">
+                    <label>
+                        <span className="">Email</span>
+                        <br />
+                        <input
+                            className="h-8 w-full rounded p-2 text-black outline-black"
+                            type="email"
+                            name="email"
+                        ></input>
+                    </label>
                     <br />
-                    <input
-                        className="h-8 w-full rounded p-2 text-black outline-black"
-                        type="email"
-                        name="email"
-                    ></input>
-                </label>
-                <br />
-                <label>
-                    <span className="">Contraseña</span>
+                    <label>
+                        <span className="">Contraseña</span>
+                        <br />
+                        <input
+                            className="h-8 w-full rounded p-2 text-black outline-black"
+                            type="password"
+                            name="password"
+                        ></input>
+                    </label>
                     <br />
-                    <input
-                        className="h-8 w-full rounded p-2 text-black outline-black"
-                        type="password"
-                        name="password"
-                    ></input>
-                </label>
-                <br />
-                <button
-                    className="mx-auto h-8 w-1/2 rounded border-2 border-white hover:bg-white hover:font-bold hover:text-black"
-                    type="submit"
-                >
-                    Log in
-                </button>
-            </form>
-        </div>
+                    <button
+                        className="mx-auto h-8 w-1/2 rounded border-2 border-white hover:bg-white hover:font-bold hover:text-black"
+                        type="submit"
+                    >
+                        Log in
+                    </button>
+                </form>
+            </div>
+        </>
     );
 };
 
