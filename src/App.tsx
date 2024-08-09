@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Listado from './components/Listado';
 import Login from './components/Login';
+import Detalle from './components/Detalle';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                             }
                         ></Route>
                         <Route path="/listado" element={<Listado />}></Route>
+                        <Route path="/detalle" element={<Detalle />}></Route>
                     </Routes>
                 </div>
                 <Footer />
