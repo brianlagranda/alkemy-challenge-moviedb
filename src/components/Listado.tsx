@@ -3,13 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
-interface Movie {
-    id: string;
-    title: string;
-    overview: string;
-    poster_path: string;
-}
+import { Movie } from '../types/movieType';
 
 const MySwal = withReactContent(Swal);
 
