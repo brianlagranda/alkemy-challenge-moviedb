@@ -28,11 +28,11 @@ const Detalle = () => {
                         <img
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                         ></img>
-                        <h2 className="p-4 text-center text-2xl font-bold">
+                        <h2 className="my-4 bg-black p-4 text-center text-2xl font-bold text-white">
                             {movie.title}{' '}
                         </h2>
                     </div>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 p-2">
                         <h5>
                             <strong className="text-lg font-bold">
                                 Fecha de estreno:
