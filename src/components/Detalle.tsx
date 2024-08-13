@@ -22,6 +22,11 @@ const Detalle = () => {
     return (
         <>
             {!Token && <Navigate to="/" />}
+            {!movie && (
+                <div className="flex justify-center">
+                    <span className="loading loading-spinner loading-lg"></span>
+                </div>
+            )}
             {movie && (
                 <>
                     <div className="">
