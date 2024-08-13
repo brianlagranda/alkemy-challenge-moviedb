@@ -33,7 +33,7 @@ const Listado = () => {
         <>
             {!Token && <Navigate to="/" />}
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-4 p-4">
                 {moviesList.map((movie, idx) => {
                     return (
                         <div

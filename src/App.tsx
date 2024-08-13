@@ -10,7 +10,7 @@ function App() {
         <BrowserRouter>
             <div className="flex h-screen select-none flex-col justify-between">
                 <Header />
-                <div className="container mx-auto p-4">
+                <div className="container mx-auto">
                     <Routes>
                         <Route
                             path="/"
