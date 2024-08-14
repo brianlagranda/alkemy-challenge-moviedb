@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Buscador from './Buscador';
 
 const Header = () => {
     return (
@@ -14,11 +15,9 @@ const Header = () => {
                     <li className="hover:bg-white hover:text-black">
                         <Link to="/listado">Listado</Link>
                     </li>
-                    <li className="hover:bg-white hover:text-black">
-                        <Link to="/contacto">Contacto</Link>
-                    </li>
                 </ul>
             </nav>
+            <Buscador />
         </header>
     );
 };
