@@ -32,8 +32,13 @@ const Listado = () => {
     return (
         <>
             {!Token && <Navigate to="/" />}
+            {!moviesList && (
+                <div className="flex justify-center">
+                    <span className="loading loading-spinner loading-lg"></span>
+                </div>
+            )}
 
-            <div className="grid grid-cols-1 gap-4 p-4">
+            <div className="grid grid-cols-1 gap-4 p-4 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                 {moviesList.map((movie, idx) => {
                     return (
                         <div
@@ -47,10 +52,10 @@ const Listado = () => {
                                 <h2 className="text-xl font-bold">
                                     {movie.title}
                                 </h2>
-                                <p className="">{`${movie.overview.substring(0, 80)}...`}</p>
+                                <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
                                 <Link
                                     to={`/detalle?movieID=${movie.id}`}
-                                    className="w-1/2 rounded border bg-black p-2 text-center text-white hover:bg-white hover:text-black"
+                                    className="w-1/2 rounded border bg-black p-2 text-center text-white hover:bg-white hover:text-black xs:w-full"
                                 >
                                     View detail
                                 </Link>
