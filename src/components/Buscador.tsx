@@ -22,21 +22,26 @@ const Buscador = () => {
                 icon: 'warning',
             });
         } else {
+            e.currentTarget.keyword.value = '';
             navigate(`/resultados?keyword=${keyword}`);
         }
     };
 
     return (
-        <form onSubmit={submitHandler} className="flex gap-2">
-            <label>
+        <form
+            onSubmit={submitHandler}
+            className="flex w-full items-center justify-center gap-2 px-4 pt-4"
+        >
+            <label className="w-full xs:w-2/3 md:w-1/2 lg:w-1/3">
                 <input
-                    className="h-8 w-full rounded p-2 text-black outline-black"
+                    className="h-8 w-full rounded border p-2 text-black outline-black"
                     type="text"
                     name="keyword"
+                    placeholder="¿Qué película buscás?"
                 ></input>
             </label>
             <button
-                className="mx-auto h-8 w-1/2 rounded border-2 border-white hover:bg-white hover:font-bold hover:text-black"
+                className="h-8 rounded border border-white bg-black px-2 text-white hover:bg-white hover:font-bold hover:text-black"
                 type="submit"
             >
                 Buscar

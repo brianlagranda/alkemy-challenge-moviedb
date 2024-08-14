@@ -4,13 +4,15 @@ import Header from './components/Header';
 import Listado from './components/Listado';
 import Login from './components/Login';
 import Detalle from './components/Detalle';
+import Resultados from './components/Resultados';
+import Buscador from './components/Buscador';
 
 function App() {
     return (
         <BrowserRouter>
             <div className="flex h-screen select-none flex-col justify-between">
                 <Header />
-                <div className="container mx-auto">
+                <div className="">
                     <Routes>
                         <Route
                             path="/"
@@ -18,8 +20,25 @@ function App() {
                                 <Login target={''} email={''} password={''} />
                             }
                         ></Route>
-                        <Route path="/listado" element={<Listado />}></Route>
+                        <Route
+                            path="/listado"
+                            element={
+                                <>
+                                    <Buscador />
+                                    <Listado />
+                                </>
+                            }
+                        ></Route>
                         <Route path="/detalle" element={<Detalle />}></Route>
+                        <Route
+                            path="/resultados"
+                            element={
+                                <>
+                                    <Buscador />
+                                    <Resultados />
+                                </>
+                            }
+                        ></Route>
                     </Routes>
                 </div>
                 <Footer />
