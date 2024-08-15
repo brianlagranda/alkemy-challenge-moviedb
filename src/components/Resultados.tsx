@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Movie } from '../types/movieType';
@@ -12,8 +12,9 @@ const Resultados = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const query = new URLSearchParams(window.location.search);
-    const keyword = query.get('keyword') || '';
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const keyword = query.get('keyword');
 
     const Token = sessionStorage.getItem('token');
 
@@ -56,14 +57,14 @@ const Resultados = () => {
 
     if (error) {
         return (
-            <div className="flex justify-center">
+            <div className="my-4 flex justify-center">
                 <span className="text-red-500">{error}</span>
             </div>
         );
     }
 
     return (
-        <div className="xs:grid-cols-2 xs:mx-auto grid grid-cols-1 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 p-4 xs:mx-auto xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {moviesList.length > 0 ? (
                 moviesList.map((movie) => (
                     <div
@@ -79,7 +80,7 @@ const Resultados = () => {
                             <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
                             <Link
                                 to={`/detalle?movieID=${movie.id}`}
-                                className="xs:w-full w-1/2 rounded border bg-black p-2 text-center text-white hover:bg-white hover:text-black"
+                                className="w-1/2 rounded border bg-black p-2 text-center text-white hover:bg-white hover:text-black xs:w-full"
                             >
                                 View detail
                             </Link>
@@ -87,7 +88,7 @@ const Resultados = () => {
                     </div>
                 ))
             ) : (
-                <div className="flex justify-center">
+                <div className="col-span-4 my-auto flex h-screen items-center justify-center">
                     <span>No results found</span>
                 </div>
             )}
