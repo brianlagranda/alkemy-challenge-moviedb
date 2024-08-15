@@ -29,12 +29,12 @@ const Detalle = () => {
             )}
             {movie && (
                 <>
-                    <div className="lg:grid-cols-[1fr, 2fr] lg:grid lg:grid-rows-[1fr,100%] xl:mx-auto xl:w-[80%] xl:rounded xl:border xl:border-emerald-200 xl:shadow-xl xl:shadow-emerald-100">
+                    <div className="lg:grid-cols-[1fr, 2fr] h-fit lg:m-8 lg:mx-auto lg:grid lg:w-[80%] lg:grid-rows-[1fr,100%] lg:rounded-lg lg:shadow-xl lg:shadow-emerald-100 xl:mx-auto">
                         <img
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                            className="mx-auto xs:pt-4 lg:row-span-2 lg:row-start-1 lg:mx-0 lg:pt-0"
+                            className="mx-auto xs:pt-4 lg:row-span-2 lg:row-start-1 lg:mx-0 lg:rounded-lg lg:rounded-tr-none lg:pt-0"
                         ></img>
-                        <h2 className="my-4 bg-emerald-600 p-4 text-center text-2xl font-bold text-white lg:col-start-2 lg:row-start-1 lg:mx-auto lg:my-0 lg:w-full lg:items-center lg:p-0">
+                        <h2 className="my-4 bg-emerald-600 p-4 text-center text-2xl font-bold text-white lg:col-start-2 lg:row-start-1 lg:mx-auto lg:my-0 lg:w-full lg:items-center lg:rounded-tr-lg lg:p-0">
                             {movie.title}
                         </h2>
                         <div className="flex flex-col gap-4 p-2 lg:col-start-2 lg:row-start-2 lg:p-4">

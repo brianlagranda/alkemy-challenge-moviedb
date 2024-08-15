@@ -10,37 +10,33 @@ import Buscador from './components/Buscador';
 function App() {
     return (
         <BrowserRouter>
-            <div className="flex h-screen select-none flex-col justify-between">
+            <div className="flex h-dvh select-none flex-col justify-between">
                 <Header />
-                <div className="">
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <Login target={''} email={''} password={''} />
-                            }
-                        ></Route>
-                        <Route
-                            path="/listado"
-                            element={
-                                <>
-                                    <Buscador />
-                                    <Listado />
-                                </>
-                            }
-                        ></Route>
-                        <Route path="/detalle" element={<Detalle />}></Route>
-                        <Route
-                            path="/resultados"
-                            element={
-                                <>
-                                    <Buscador />
-                                    <Resultados />
-                                </>
-                            }
-                        ></Route>
-                    </Routes>
-                </div>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={<Login target={''} email={''} password={''} />}
+                    ></Route>
+                    <Route
+                        path="/listado"
+                        element={
+                            <>
+                                <Buscador />
+                                <Listado />
+                            </>
+                        }
+                    ></Route>
+                    <Route path="/detalle" element={<Detalle />}></Route>
+                    <Route
+                        path="/resultados"
+                        element={
+                            <>
+                                <Buscador />
+                                <Resultados />
+                            </>
+                        }
+                    ></Route>
+                </Routes>
                 <Footer />
             </div>
         </BrowserRouter>

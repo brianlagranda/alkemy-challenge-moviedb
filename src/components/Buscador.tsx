@@ -30,7 +30,7 @@ const Buscador = () => {
     return (
         <form
             onSubmit={submitHandler}
-            className="flex w-full items-center justify-center gap-2 px-4 pt-4"
+            className="flex w-full flex-row items-center justify-center gap-2 px-4 pt-4"
         >
             <label className="w-full xs:w-2/3 md:w-1/2 lg:w-1/3">
                 <input
@@ -41,7 +41,7 @@ const Buscador = () => {
                 ></input>
             </label>
             <button
-                className="h-8 rounded border border-white bg-black px-2 text-white hover:bg-white hover:font-bold hover:text-black"
+                className="h-8 rounded border border-white bg-black px-2 text-white hover:border hover:border-black hover:bg-white hover:font-bold hover:text-black active:bg-black/80 active:text-white"
                 type="submit"
             >
                 Buscar
