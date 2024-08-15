@@ -64,17 +64,18 @@ const Resultados = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 gap-4 p-4 xs:mx-auto xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="my-4 grid grid-cols-1 gap-4 p-4 xs:mx-auto xs:grid-cols-2 md:grid-cols-3 md:gap-8 lg:grid-cols-8">
             {moviesList.length > 0 ? (
                 moviesList.map((movie) => (
                     <div
                         key={movie.id}
-                        className="flex w-full flex-col rounded border"
+                        className="flex w-full flex-col rounded border transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                     >
-                        <img
-                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                            alt={movie.title}
-                        />
+                        <Link to={`/detalle?movieID=${movie.id}`} className="">
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                            />
+                        </Link>
                         <div className="flex h-full w-full flex-col gap-2 p-2">
                             <h2 className="text-xl font-bold">{movie.title}</h2>
                             <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>

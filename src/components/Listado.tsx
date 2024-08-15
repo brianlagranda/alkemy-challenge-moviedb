@@ -38,16 +38,21 @@ const Listado = () => {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 gap-4 p-4 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            <div className="my-4 grid grid-cols-1 gap-6 p-4 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {moviesList.map((movie, idx) => {
                     return (
                         <div
                             key={idx}
-                            className="flex w-full flex-col rounded border"
+                            className="flex w-full flex-col rounded border transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                         >
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                            ></img>
+                            <Link
+                                to={`/detalle?movieID=${movie.id}`}
+                                className=""
+                            >
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                                />
+                            </Link>
                             <div className="flex h-full w-full flex-col gap-2 p-2">
                                 <h2 className="text-xl font-bold">
                                     {movie.title}
