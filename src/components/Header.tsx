@@ -14,6 +14,9 @@ const Header = () => {
                     <li className="bg-gradient-to-r from-white to-white bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out visited:border-b-2 hover:bg-[length:100%_2px]">
                         <Link to="/listado">Listado</Link>
                     </li>
+                    <li className="bg-gradient-to-r from-white to-white bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out visited:border-b-2 hover:bg-[length:100%_2px]">
+                        <Link to="/favoritos">Favoritos</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
