@@ -7,21 +7,16 @@ import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 
 interface PeliculaProps {
     movie: Movie;
-    isFavorite: boolean;
     addOrRemoveFromFavs: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Pelicula: React.FC<PeliculaProps> = ({
-    movie,
-    isFavorite,
-    addOrRemoveFromFavs,
-}) => {
+const Pelicula: React.FC<PeliculaProps> = ({ movie, addOrRemoveFromFavs }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div
             key={movie.id}
-            className="relative flex w-full flex-col rounded border transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-[1.01]"
+            className="relative flex w-full flex-col rounded border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-[1.01]"
         >
             <button
                 className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full border bg-white text-xl"
@@ -31,16 +26,12 @@ const Pelicula: React.FC<PeliculaProps> = ({
                 data-movie-id={movie.id}
             >
                 <FontAwesomeIcon
-                    icon={
-                        isFavorite || isHovered ? faHeartSolid : faHeartRegular
-                    }
-                    className={
-                        isFavorite || isHovered ? 'text-red-500' : 'text-black'
-                    }
+                    icon={isHovered ? faHeartSolid : faHeartRegular}
+                    className={isHovered ? 'text-red-500' : 'text-black'}
                 />
             </button>
 
-            <Link to={`/detalle?movieID=${movie.id}`} className="">
+            <Link to={`/detalle?movieID=${movie.id}`}>
                 <img
                     src={
                         movie.poster_path
@@ -54,7 +45,7 @@ const Pelicula: React.FC<PeliculaProps> = ({
                 <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
                 <Link
                     to={`/detalle?movieID=${movie.id}`}
-                    className="w-1/2 rounded border bg-black p-2 text-center text-white hover:bg-white hover:text-black xs:w-full"
+                    className="w-1/2 rounded border bg-black p-2 text-center text-white hover:border-black hover:bg-white hover:text-black xs:w-full"
                 >
                     View detail
                 </Link>
