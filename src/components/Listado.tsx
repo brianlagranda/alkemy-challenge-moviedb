@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { Movie } from '../types/movieType';
+import { Movie, MovieListProps } from '../types/movieType';
+import Pelicula from './Pelicula';
 
 const MySwal = withReactContent(Swal);
 
-const Listado = () => {
+const Listado: React.FC<MovieListProps> = ({ addOrRemoveFromFavs }) => {
     const [moviesList, setMoviesList] = useState<Movie[]>([]);
 
     const Token = sessionStorage.getItem('token');
@@ -39,35 +40,19 @@ const Listado = () => {
             )}
 
             <div className="my-4 grid grid-cols-1 gap-6 p-4 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {moviesList.map((movie, idx) => {
-                    return (
-                        <div
+                {moviesList.length > 0 ? (
+                    moviesList.map((movie, idx) => (
+                        <Pelicula
                             key={idx}
-                            className="flex w-full flex-col rounded border transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
-                        >
-                            <Link
-                                to={`/detalle?movieID=${movie.id}`}
-                                className=""
-                            >
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                                />
-                            </Link>
-                            <div className="flex h-full w-full flex-col gap-2 p-2">
-                                <h2 className="text-xl font-bold">
-                                    {movie.title}
-                                </h2>
-                                <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
-                                <Link
-                                    to={`/detalle?movieID=${movie.id}`}
-                                    className="w-1/2 rounded border bg-black p-2 text-center text-white hover:bg-white hover:text-black xs:w-full"
-                                >
-                                    View detail
-                                </Link>
-                            </div>
-                        </div>
-                    );
-                })}
+                            movie={movie}
+                            addOrRemoveFromFavs={addOrRemoveFromFavs}
+                        />
+                    ))
+                ) : (
+                    <div className="col-span-4 my-auto flex h-full items-center justify-center">
+                        <span>No se encontraron resultados</span>
+                    </div>
+                )}
             </div>
         </>
     );
