@@ -50,7 +50,7 @@ const Detalle = () => {
                             </p>
                             <h5 className="text-lg font-bold">Géneros:</h5>
                             <ul>
-                                {movie.genres.map((genre) => (
+                                {movie.genres?.map((genre) => (
                                     <li
                                         key={genre.id}
                                         className="px-4 py-1 font-bold"
