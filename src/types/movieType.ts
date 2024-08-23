@@ -3,7 +3,7 @@ type MovieGenre = {
     name: string;
 };
 
-export interface Movie {
+export interface MovieProps {
     id: string;
     title: string;
     overview: string;
@@ -15,7 +15,6 @@ export interface Movie {
     isFavourite: boolean;
 }
 
-export type MovieListProps = {
-    favorites: Movie[];
-    addOrRemoveFromFavs: (e: React.MouseEvent<HTMLButtonElement>) => void;
+export type MovieComponentProps = {
+    movie: MovieProps;
 };
