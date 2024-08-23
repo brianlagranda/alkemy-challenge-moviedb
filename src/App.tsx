@@ -1,71 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Listado from './components/Listado';
+import MovieList from './components/MovieList';
 import Login from './components/Login';
-import Detalle from './components/Detalle';
-import Resultados from './components/Resultados';
-import Buscador from './components/Buscador';
-import Favoritos from './components/Favoritos';
-import { useEffect, useState } from 'react';
-import { Movie } from './types/movieType';
+import DetailedMovie from './components/DetailedMovie';
+import Results from './components/Results';
+import SearchBar from './components/SearchBar';
+import Favourites from './components/Favourites';
 
 function App() {
-    const [favorites, setFavorites] = useState<Movie[]>([]);
-
-    useEffect(() => {
-        const favsInLocal = localStorage.getItem('favs');
-
-        if (favsInLocal !== null) {
-            const favsArray: Movie[] = JSON.parse(favsInLocal);
-            setFavorites(favsArray);
-        }
-    }, []);
-
-    const addOrRemoveFromFavs = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const favMovies = localStorage.getItem('favs');
-        let tempMoviesInFav: Movie[];
-
-        if (favMovies === null) {
-            tempMoviesInFav = [];
-        } else {
-            tempMoviesInFav = JSON.parse(favMovies);
-        }
-
-        const btn = e.currentTarget;
-        const parent = btn.parentElement;
-        const imgURL = parent?.querySelector('img')?.getAttribute('src');
-        const title = parent?.querySelector('h5')?.innerText;
-        const overview = parent?.querySelector('p')?.innerText;
-
-        const movieData: Movie = {
-            imgURL: imgURL || '',
-            title: title || '',
-            overview: overview || '',
-            isFavourite: false,
-            id: btn.dataset.movieId || '',
-        };
-
-        const moviesInArray = tempMoviesInFav.find(
-            (oneMovie: Movie) => oneMovie.id === movieData.id,
-        );
-
-        if (!moviesInArray) {
-            movieData.isFavourite = true;
-            tempMoviesInFav.push(movieData);
-            localStorage.setItem('favs', JSON.stringify(tempMoviesInFav));
-            setFavorites(tempMoviesInFav);
-            console.log('Se agregó la película a favoritos');
-        } else {
-            const moviesLeft = tempMoviesInFav.filter(
-                (oneMovie: Movie) => oneMovie.id !== movieData.id,
-            );
-            localStorage.setItem('favs', JSON.stringify(moviesLeft));
-            setFavorites(moviesLeft);
-            console.log('Se quitó la película a favoritos');
-        }
-    };
-
     return (
         <BrowserRouter>
             <div className="flex h-dvh select-none flex-col justify-between">
@@ -76,36 +19,25 @@ function App() {
                         element={<Login target={''} email={''} password={''} />}
                     />
                     <Route
-                        path="/listado"
+                        path="/movieList"
                         element={
                             <>
-                                <Buscador />
-                                <Listado
-                                    addOrRemoveFromFavs={addOrRemoveFromFavs}
-                                    favorites={favorites}
-                                />
+                                <SearchBar />
+                                <MovieList />
                             </>
                         }
                     />
-                    <Route path="/detalle" element={<Detalle />} />
+                    <Route path="/detailedMovie" element={<DetailedMovie />} />
                     <Route
-                        path="/resultados"
+                        path="/results"
                         element={
                             <>
-                                <Buscador />
-                                <Resultados />
+                                <SearchBar />
+                                <Results />
                             </>
                         }
                     />
-                    <Route
-                        path="/favoritos"
-                        element={
-                            <Favoritos
-                                favorites={favorites}
-                                addOrRemoveFromFavs={addOrRemoveFromFavs}
-                            />
-                        }
-                    />
+                    <Route path="/favourites" element={<Favourites />} />
                 </Routes>
                 <Footer />
             </div>

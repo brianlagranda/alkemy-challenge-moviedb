@@ -13,6 +13,8 @@ const Login: React.FC<LoginProps> = () => {
     const MySwal = withReactContent(Swal);
     const navigate = useNavigate();
 
+    const Token = sessionStorage.getItem('token');
+
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -56,15 +58,13 @@ const Login: React.FC<LoginProps> = () => {
                 title: 'Perfecto, ingresaste correctamente.',
                 icon: 'success',
             });
-            navigate('/listado');
+            navigate('/movieList');
         });
     };
 
-    const Token = sessionStorage.getItem('token');
-
     return (
         <>
-            {Token && <Navigate to="/listado" />}
+            {Token && <Navigate to="/movieList" />}
 
             <div className="mx-auto flex flex-col items-center gap-8 rounded-lg bg-black p-6 text-white shadow-2xl shadow-black sm:w-3/4 md:w-2/4 lg:w-1/3">
                 <h2 className="text-xl">Formulario de Login</h2>

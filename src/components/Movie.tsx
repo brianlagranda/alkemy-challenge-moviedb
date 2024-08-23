@@ -1,17 +1,30 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Movie } from '../types/movieType';
+import { MovieComponentProps } from '../types/movieType';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    addFavourite,
+    removeFavourite,
+} from '../features/favourites/favouritesSlice';
+import { RootState } from '../app/store';
 
-interface PeliculaProps {
-    movie: Movie;
-    addOrRemoveFromFavs: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
+const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
+    const dispatch = useDispatch();
+    const favourites = useSelector(
+        (state: RootState) => state.favourite.favourites,
+    );
 
-const Pelicula: React.FC<PeliculaProps> = ({ movie, addOrRemoveFromFavs }) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const isFavourite = favourites.some((fav) => fav.id === movie.id);
+
+    const handleFavClick = () => {
+        if (isFavourite) {
+            dispatch(removeFavourite(movie));
+        } else {
+            dispatch(addFavourite(movie));
+        }
+    };
 
     return (
         <div
@@ -19,19 +32,17 @@ const Pelicula: React.FC<PeliculaProps> = ({ movie, addOrRemoveFromFavs }) => {
             className="relative flex w-full flex-col rounded border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-[1.01]"
         >
             <button
-                className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full border bg-white text-xl"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                onClick={addOrRemoveFromFavs}
+                className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full border bg-white text-xl transition-colors duration-300 ease-in-out"
+                onClick={handleFavClick}
                 data-movie-id={movie.id}
             >
                 <FontAwesomeIcon
-                    icon={isHovered ? faHeartSolid : faHeartRegular}
-                    className={isHovered ? 'text-red-500' : 'text-black'}
+                    icon={isFavourite ? faHeartSolid : faHeartRegular}
+                    className={isFavourite ? 'text-red-500' : 'text-black'}
                 />
             </button>
 
-            <Link to={`/detalle?movieID=${movie.id}`}>
+            <Link to={`/detailedMovie?movieID=${movie.id}`}>
                 <img
                     src={
                         movie.poster_path
@@ -44,7 +55,7 @@ const Pelicula: React.FC<PeliculaProps> = ({ movie, addOrRemoveFromFavs }) => {
                 <h2 className="text-xl font-bold">{movie.title}</h2>
                 <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
                 <Link
-                    to={`/detalle?movieID=${movie.id}`}
+                    to={`/detailedMovie?movieID=${movie.id}`}
                     className="w-1/2 rounded border bg-black p-2 text-center text-white hover:border-black hover:bg-white hover:text-black xs:w-full"
                 >
                     View detail
@@ -54,4 +65,4 @@ const Pelicula: React.FC<PeliculaProps> = ({ movie, addOrRemoveFromFavs }) => {
     );
 };
 
-export default Pelicula;
+export default Movie;

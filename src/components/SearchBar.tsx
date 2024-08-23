@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MySwal = withReactContent(Swal);
 
-const Buscador = () => {
+const SearchBar = () => {
     const navigate = useNavigate();
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ const Buscador = () => {
             });
         } else {
             e.currentTarget.keyword.value = '';
-            navigate(`/resultados?keyword=${keyword}`);
+            navigate(`/results?keyword=${keyword}`);
         }
     };
 
@@ -37,7 +37,7 @@ const Buscador = () => {
                     className="h-8 w-full rounded border p-2 text-black outline-black"
                     type="text"
                     name="keyword"
-                    placeholder="¿Qué película buscás?"
+                    placeholder="¿Qué película estás buscando?"
                 ></input>
             </label>
             <button
@@ -50,4 +50,4 @@ const Buscador = () => {
     );
 };
 
-export default Buscador;
+export default SearchBar;
