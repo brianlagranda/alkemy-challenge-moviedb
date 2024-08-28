@@ -9,9 +9,11 @@ import {
     removeFavourite,
 } from '../features/favourites/favouritesSlice';
 import { RootState } from '../app/store';
+import imageNotFound from '../assets/NoImageFound.png';
 
 const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
     const dispatch = useDispatch();
+
     const favourites = useSelector(
         (state: RootState) => state.favourite.favourites,
     );
@@ -25,6 +27,12 @@ const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
             dispatch(addFavourite(movie));
         }
     };
+
+    const imgEndpoint = 'https://image.tmdb.org/t/p/w500/';
+
+    const imageSrc = movie.poster_path
+        ? `${imgEndpoint}${movie.poster_path}`
+        : movie.imgURL || imageNotFound;
 
     return (
         <div
@@ -43,15 +51,9 @@ const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
             </button>
 
             <Link to={`/detailedMovie?movieID=${movie.id}`}>
-                <img
-                    src={
-                        movie.poster_path
-                            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                            : movie.imgURL
-                    }
-                />
+                <img src={imageSrc} loading="lazy" />
             </Link>
-            <div className="flex h-full w-full flex-col gap-2 p-2">
+            <div className="flex h-full w-full flex-col gap-2 bg-white p-2">
                 <h2 className="text-xl font-bold">{movie.title}</h2>
                 <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
                 <Link
