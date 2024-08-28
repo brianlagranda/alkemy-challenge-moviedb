@@ -1,17 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { FavouritesStateProps } from '../../types/movieType';
 
-export interface Movie {
-    id: string;
-    title: string;
-    overview: string;
-    imgURL: string;
-    isFavourite: boolean;
-}
-
-export interface FavouritesState {
-    favourites: Movie[];
-}
-const initialState: FavouritesState = {
+const initialState: FavouritesStateProps = {
     favourites: JSON.parse(localStorage.getItem('favs') || '[]'),
 };
 

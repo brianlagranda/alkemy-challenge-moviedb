@@ -18,3 +18,7 @@ export interface MovieProps {
 export type MovieComponentProps = {
     movie: MovieProps;
 };
+
+export type FavouritesStateProps = {
+    favourites: MovieProps[];
+};
