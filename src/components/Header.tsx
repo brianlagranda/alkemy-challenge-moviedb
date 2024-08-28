@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <header className="flex h-14 items-center gap-4 bg-black p-4 text-white">
+        <header className="flex h-14 items-center gap-4 bg-gradient-to-r from-black via-black via-40% to-cyan-800 p-4 text-white">
             <Link to="/" className="text-2xl font-bold">
                 AlkeFlix
             </Link>
@@ -18,6 +18,7 @@ const Header = () => {
                         <Link to="/favourites">Favoritos</Link>
                     </li>
                 </ul>
+                <button onClick={() => sessionStorage.clear()}>Log Out</button>
             </nav>
         </header>
     );

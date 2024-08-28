@@ -66,8 +66,8 @@ const Login: React.FC<LoginProps> = () => {
         <>
             {Token && <Navigate to="/movieList" />}
 
-            <div className="mx-auto flex flex-col items-center gap-8 rounded-lg bg-black p-6 text-white shadow-2xl shadow-black sm:w-3/4 md:w-2/4 lg:w-1/3">
-                <h2 className="text-xl">Formulario de Login</h2>
+            <div className="mx-auto my-48 flex h-96 flex-col items-center justify-center gap-8 rounded-lg bg-gradient-to-r from-black via-black via-30% to-cyan-800 p-6 text-white shadow-2xl shadow-black sm:w-3/4 md:w-2/4 lg:w-1/3">
+                <h2 className="text-4xl">Inicia sesión</h2>
                 <form onSubmit={submitHandler} className="flex w-full flex-col">
                     <label>
                         <span className="">Email</span>
@@ -90,7 +90,7 @@ const Login: React.FC<LoginProps> = () => {
                     </label>
                     <br />
                     <button
-                        className="mx-auto h-8 w-1/2 rounded border-2 border-white hover:bg-white hover:font-bold hover:text-black"
+                        className="mx-auto h-8 w-1/3 rounded border-2 border-white transition-colors duration-300 hover:bg-white hover:font-bold hover:text-black"
                         type="submit"
                     >
                         Log in

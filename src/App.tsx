@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Footer from './components/Footer';
 import Header from './components/Header';
 import MovieList from './components/MovieList';
 import Login from './components/Login';
@@ -11,8 +10,9 @@ import Favourites from './components/Favourites';
 function App() {
     return (
         <BrowserRouter>
-            <div className="flex h-dvh select-none flex-col justify-between">
+            <div className="h-full select-none">
                 <Header />
+
                 <Routes>
                     <Route
                         path="/"
@@ -39,7 +39,6 @@ function App() {
                     />
                     <Route path="/favourites" element={<Favourites />} />
                 </Routes>
-                <Footer />
             </div>
         </BrowserRouter>
     );
