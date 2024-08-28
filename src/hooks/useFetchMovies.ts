@@ -6,7 +6,11 @@ import { MovieProps } from '../types/movieType';
 
 const MySwal = withReactContent(Swal);
 
-export const useFetchMovies = (endpoint: string, queryParams: string) => {
+export const useFetchMovies = (
+    endpoint: string,
+    queryParams: string,
+    page: number,
+) => {
     const [data, setData] = useState<MovieProps[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<null | string>(null);
@@ -17,9 +21,12 @@ export const useFetchMovies = (endpoint: string, queryParams: string) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `https://api.themoviedb.org/3/${endpoint}?api_key=${apiKey}&${queryParams}`,
+                    `https://api.themoviedb.org/3/${endpoint}?api_key=${apiKey}&${queryParams}&page=${page}`,
                 );
-                setData(response.data.results || [response.data]);
+                setData((prevData) => [
+                    ...prevData,
+                    ...(response.data.results || [response.data]),
+                ]);
             } catch (e) {
                 setError(
                     'Hubo un error inesperado, intente nuevamente más tarde',
@@ -35,7 +42,7 @@ export const useFetchMovies = (endpoint: string, queryParams: string) => {
         };
 
         fetchData();
-    }, [endpoint, queryParams, apiKey]);
+    }, [endpoint, queryParams, page, apiKey]);
 
     return { data, loading, error };
 };

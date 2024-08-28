@@ -2,6 +2,19 @@
 import { Navigate } from 'react-router-dom';
 import { useFetchMovies } from '../hooks/useFetchMovies';
 
+const genreColors: { [key: string]: string } = {
+    Acción: 'bg-red-500',
+    Aventura: 'bg-green-500',
+    Comedia: 'bg-yellow-500',
+    Drama: 'bg-blue-500',
+    Terror: 'bg-purple-500',
+    Romance: 'bg-pink-500',
+    Familia: 'bg-emerald-500',
+    Animación: 'bg-cyan-500',
+    'Ciencia ficción': 'bg-purple-500',
+    Suspense: 'bg-lime-500',
+};
+
 const DetailedMovie = () => {
     const Token = sessionStorage.getItem('token');
 
@@ -12,7 +25,7 @@ const DetailedMovie = () => {
         data: movieData,
         loading,
         error,
-    } = useFetchMovies(`movie/${movieID}`, 'language=es-ES');
+    } = useFetchMovies(`movie/${movieID}`, 'language=es-ES', 1);
 
     const movie = movieData.length > 0 ? movieData[0] : undefined;
 
@@ -43,7 +56,7 @@ const DetailedMovie = () => {
                         className="mx-auto xs:pt-4 lg:row-span-2 lg:row-start-1 lg:mx-0 lg:rounded-lg lg:rounded-tr-none lg:pt-0"
                         alt={movie.title}
                     />
-                    <h2 className="my-4 bg-emerald-600 p-4 text-center text-2xl font-bold text-white lg:col-start-2 lg:row-start-1 lg:mx-auto lg:my-0 lg:w-full lg:items-center lg:rounded-tr-lg lg:p-0">
+                    <h2 className="my-4 bg-cyan-800 p-4 text-center text-2xl font-bold text-white lg:col-start-2 lg:row-start-1 lg:mx-auto lg:my-0 lg:w-full lg:items-center lg:rounded-tr-lg lg:p-0">
                         {movie.title}
                     </h2>
                     <div className="flex flex-col gap-4 p-2 lg:col-start-2 lg:row-start-2 lg:p-4">
@@ -58,11 +71,11 @@ const DetailedMovie = () => {
                             {movie.overview}
                         </p>
                         <h5 className="text-lg font-bold">Géneros:</h5>
-                        <ul>
+                        <ul className="flex w-full gap-2">
                             {movie.genres?.map((genre) => (
                                 <li
                                     key={genre.id}
-                                    className="px-4 py-1 font-bold"
+                                    className={`w-fit rounded-full ${genreColors[genre.name] || 'bg-gray-500'} px-4 py-1 font-bold`}
                                 >
                                     {genre.name}
                                 </li>
