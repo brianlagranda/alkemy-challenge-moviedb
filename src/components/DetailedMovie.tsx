@@ -1,6 +1,5 @@
-// src/components/DetailedMovie.tsx
 import { Navigate } from 'react-router-dom';
-import { useFetchMovies } from '../hooks/useFetchMovies';
+import { useFetchSingleMovie } from '../hooks/useFetchSingleMovie';
 
 const genreColors: { [key: string]: string } = {
     Acción: 'bg-red-500',
@@ -25,9 +24,9 @@ const DetailedMovie = () => {
         data: movieData,
         loading,
         error,
-    } = useFetchMovies(`movie/${movieID}`, 'language=es-ES', 1);
+    } = useFetchSingleMovie(`${movieID}`);
 
-    const movie = movieData.length > 0 ? movieData[0] : undefined;
+    const movie = movieData !== null ? movieData : undefined;
 
     if (!Token) return <Navigate to="/" />;
 
@@ -50,7 +49,7 @@ const DetailedMovie = () => {
     return (
         <>
             {movie && (
-                <div className="lg:grid-cols-[1fr, 2fr] h-fit lg:m-8 lg:mx-auto lg:grid lg:w-[80%] lg:grid-rows-[1fr,100%] lg:rounded-lg lg:shadow-xl lg:shadow-emerald-100 xl:mx-auto">
+                <div className="h-fit lg:m-8 lg:mx-auto lg:grid lg:w-[80%] lg:grid-cols-[1fr_2fr] lg:grid-rows-[1fr_100%] lg:rounded-lg lg:shadow-xl lg:shadow-emerald-100 xl:mx-auto">
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                         className="mx-auto xs:pt-4 lg:row-span-2 lg:row-start-1 lg:mx-0 lg:rounded-lg lg:rounded-tr-none lg:pt-0"
