@@ -14,19 +14,39 @@ export const useFetchMovies = (
     const [data, setData] = useState<MovieProps[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<null | string>(null);
+    const [prevQuery, setPrevQuery] = useState<string>('');
 
     const apiKey = import.meta.env.VITE_API_KEY;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const response = await axios.get(
                     `https://api.themoviedb.org/3/${endpoint}?api_key=${apiKey}&${queryParams}&page=${page}`,
                 );
-                setData((prevData) => [
-                    ...prevData,
-                    ...(response.data.results || [response.data]),
-                ]);
+
+                const newMovies = response.data.results || [];
+
+                const seenIds = new Set(data.map((movie) => movie.id));
+
+                const filteredMovies = newMovies.filter(
+                    (movie: { id: string }) => {
+                        if (seenIds.has(movie.id)) {
+                            return false;
+                        } else {
+                            seenIds.add(movie.id);
+                            return true;
+                        }
+                    },
+                );
+
+                if (queryParams !== prevQuery) {
+                    setData(filteredMovies);
+                    setPrevQuery(queryParams);
+                } else {
+                    setData((prevData) => [...prevData, ...filteredMovies]);
+                }
             } catch (e) {
                 setError(
                     'Hubo un error inesperado, intente nuevamente más tarde',
