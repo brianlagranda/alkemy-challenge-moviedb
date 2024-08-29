@@ -1,6 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../app/store';
+import { clearToken } from '../features/auth/authSlice';
 
 const Header = () => {
+    const token = useSelector((state: RootState) => state.auth.token);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const isLogged = token !== null;
+
+    const handleLogout = () => {
+        dispatch(clearToken());
+        navigate('/');
+    };
+
     return (
         <header className="flex h-14 items-center gap-4 bg-gradient-to-r from-black via-black via-40% to-cyan-800 p-4 text-white">
             <Link to="/" className="text-2xl font-bold">
@@ -18,7 +32,7 @@ const Header = () => {
                         <Link to="/favourites">Favoritos</Link>
                     </li>
                 </ul>
-                <button onClick={() => sessionStorage.clear()}>Log Out</button>
+                {isLogged && <button onClick={handleLogout}>Log Out</button>}
             </nav>
         </header>
     );

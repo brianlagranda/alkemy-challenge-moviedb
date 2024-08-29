@@ -2,6 +2,8 @@ import Axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../features/auth/authSlice';
 
 interface LoginProps {
     target: string;
@@ -12,6 +14,7 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = () => {
     const MySwal = withReactContent(Swal);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const Token = sessionStorage.getItem('token');
 
@@ -54,6 +57,7 @@ const Login: React.FC<LoginProps> = () => {
         }).then((res) => {
             const tokenData = res.data.token;
             sessionStorage.setItem('token', tokenData);
+            dispatch(setToken(tokenData));
             MySwal.fire({
                 title: 'Perfecto, ingresaste correctamente.',
                 icon: 'success',

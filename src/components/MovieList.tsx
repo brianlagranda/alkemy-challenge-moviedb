@@ -1,12 +1,15 @@
-import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Movie from './Movie';
 import { useFetchMovies } from '../hooks/useFetchMovies';
 import LoadMoreButton from './LoadMoreButton';
 import LoadingSpinner from './LoadingSpinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../app/store';
+import { incrementPage } from '../features/search/searchSlice';
 
 const MovieList = () => {
-    const [page, setPage] = useState(1);
+    const dispatch = useDispatch();
+    const page = useSelector((state: RootState) => state.search.page);
     const Token = sessionStorage.getItem('token');
 
     const {
@@ -30,18 +33,28 @@ const MovieList = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 gap-6 p-4 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <div className="px-8">
             {moviesList.length > 0 ? (
-                moviesList.map((movie, id) => <Movie key={id} movie={movie} />)
+                <>
+                    <div className="grid grid-cols-1 gap-4 xs:mx-auto xs:grid-cols-2 md:grid-cols-3 md:gap-8 lg:grid-cols-4 xl:grid-cols-5">
+                        {moviesList.map((movie) => (
+                            <Movie key={movie.id} movie={movie} />
+                        ))}
+                    </div>
+                    <div className="my-4 flex justify-center">
+                        <LoadMoreButton
+                            onClick={() => dispatch(incrementPage())}
+                            buttonTitle="Load More"
+                        />
+                    </div>
+                </>
             ) : (
-                <div className="col-span-4 my-auto flex h-full items-center justify-center">
-                    <span>No se encontraron resultados</span>
+                <div className="flex h-full items-center justify-center">
+                    <span className="text-lg">
+                        No se encontraron resultados
+                    </span>
                 </div>
             )}
-            <LoadMoreButton
-                onClick={() => setPage((prevPage) => prevPage + 1)}
-                buttonTitle="Load More"
-            />
         </div>
     );
 };
