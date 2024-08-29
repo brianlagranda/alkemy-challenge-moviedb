@@ -13,7 +13,6 @@ import imageNotFound from '../assets/NoImageFound.png';
 
 const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
     const dispatch = useDispatch();
-
     const favourites = useSelector(
         (state: RootState) => state.favourite.favourites,
     );
@@ -37,7 +36,7 @@ const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
     return (
         <div
             key={movie.id}
-            className="relative flex w-full flex-col rounded border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-[1.01]"
+            className={`relative grid w-full ${imageSrc === imageNotFound ? 'grid-rows-[2fr_1fr]' : 'grid-rows-[auto_1fr]'} rounded border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-[1.01]`}
         >
             <button
                 className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full border bg-white text-xl transition-colors duration-300 ease-in-out"
@@ -51,11 +50,15 @@ const Movie: React.FC<MovieComponentProps> = ({ movie }) => {
             </button>
 
             <Link to={`/detailedMovie?movieID=${movie.id}`}>
-                <img src={imageSrc} loading="lazy" />
+                <img
+                    src={imageSrc}
+                    loading="lazy"
+                    className={`h-full bg-[#ECECEC] ${imageSrc === imageNotFound ? 'object-contain' : 'object-fill'}`}
+                />
             </Link>
-            <div className="flex h-full w-full flex-col gap-2 bg-white p-2">
+            <div className="flex w-full flex-col justify-between gap-2 bg-white p-2">
                 <h2 className="text-xl font-bold">{movie.title}</h2>
-                <p className="h-full">{`${movie.overview.substring(0, 80)}...`}</p>
+                <p className="">{`${movie.overview.substring(0, 80)}...`}</p>
                 <Link
                     to={`/detailedMovie?movieID=${movie.id}`}
                     className="w-1/2 rounded border bg-black p-2 text-center text-white hover:border-black hover:bg-white hover:text-black xs:w-full"
