@@ -6,7 +6,7 @@ interface buttonProps {
 const LoadMoreButton: React.FC<buttonProps> = ({ onClick, buttonTitle }) => {
     return (
         <button
-            className="mx-auto rounded-lg bg-black p-2 text-white xs:col-span-2 md:col-span-3 lg:col-span-5"
+            className="mx-auto rounded-lg bg-black p-2 text-white"
             onClick={onClick}
         >
             {buttonTitle}
