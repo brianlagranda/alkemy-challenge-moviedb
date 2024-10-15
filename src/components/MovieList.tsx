@@ -20,10 +20,6 @@ const MovieList = () => {
 
     if (!Token) return <Navigate to="/" />;
 
-    if (loading) {
-        return <LoadingSpinner />;
-    }
-
     if (error) {
         return (
             <div className="flex justify-center">
@@ -41,11 +37,15 @@ const MovieList = () => {
                             <Movie key={movie.id} movie={movie} />
                         ))}
                     </div>
-                    <div className="my-4 flex justify-center">
-                        <LoadMoreButton
-                            onClick={() => dispatch(incrementPage())}
-                            buttonTitle="Load More"
-                        />
+                    <div className="my-4 flex flex-col items-center justify-center">
+                        {loading ? (
+                            <LoadingSpinner />
+                        ) : (
+                            <LoadMoreButton
+                                onClick={() => dispatch(incrementPage())}
+                                buttonTitle="Load More"
+                            />
+                        )}
                     </div>
                 </>
             ) : (
